@@ -1,0 +1,6 @@
+{
+  "name": "ISTAFA PRINTING - Percetakan & Custom Merchandise Profesional",
+  "description": "Solusi percetakan modern, custom merchandise, tumbler, banner, kartu nama, ID card, lanyard, sticker, kaos, dan undangan berkualitas tinggi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

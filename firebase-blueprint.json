@@ -1,0 +1,405 @@
+{
+  "entities": {
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized administrator account mapped by Firebase UID.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "role": { "type": "string", "enum": ["admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "AdminSessionState": {
+      "title": "AdminSessionState",
+      "description": "Active admin session lock for credential-authenticated administrator operations.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "active": { "type": "boolean" },
+        "username": { "type": "string", "maxLength": 100 },
+        "sessionToken": { "type": "string", "maxLength": 128 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["storeId", "active", "username", "sessionToken", "updatedAt"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Global store configuration, branding, logo, WhatsApp number, hero banner, and operational hours.",
+      "type": "object",
+      "properties": {
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "storeName": { "type": "string", "maxLength": 120 },
+        "tagline": { "type": "string", "maxLength": 250 },
+        "heroDescription": { "type": "string", "maxLength": 600 },
+        "whatsappNumber": { "type": "string", "maxLength": 30 },
+        "logoUrl": { "type": "string", "maxLength": 250000 },
+        "heroBannerUrl": { "type": "string", "maxLength": 250000 },
+        "address": { "type": "string", "maxLength": 500 },
+        "operatingHours": { "type": "string", "maxLength": 250 },
+        "email": { "type": "string", "maxLength": 150 },
+        "instagramUrl": { "type": "string", "maxLength": 250 },
+        "facebookUrl": { "type": "string", "maxLength": 250 },
+        "tiktokUrl": { "type": "string", "maxLength": 250 },
+        "aboutText": { "type": "string", "maxLength": 1500 },
+        "initialCashBalance": { "type": "number" },
+        "adminUsername": { "type": "string", "maxLength": 64 },
+        "adminPasswordHash": { "type": "string", "maxLength": 128 },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "updatedBy": { "type": "string", "maxLength": 100 }
+      },
+      "required": [
+        "storeId",
+        "storeName",
+        "tagline",
+        "heroDescription",
+        "whatsappNumber",
+        "logoUrl",
+        "heroBannerUrl",
+        "address",
+        "operatingHours",
+        "email",
+        "instagramUrl",
+        "facebookUrl",
+        "tiktokUrl",
+        "aboutText",
+        "initialCashBalance",
+        "adminUsername",
+        "adminPasswordHash",
+        "updatedAt",
+        "updatedBy"
+      ]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product and printing category.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 120 },
+        "icon": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 300 },
+        "sortOrder": { "type": "number" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "storeId", "name", "slug", "icon", "description", "sortOrder", "active", "createdAt", "updatedAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Custom printing or merchandise product with multi-photo gallery, variants, and pricing.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "name": { "type": "string", "maxLength": 160 },
+        "categoryId": { "type": "string", "maxLength": 128 },
+        "categoryName": { "type": "string", "maxLength": 100 },
+        "subcategory": { "type": "string", "maxLength": 120 },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "priceLabel": { "type": "string", "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "shortDescription": { "type": "string", "maxLength": 300 },
+        "images": { "type": "array" },
+        "variants": { "type": "array" },
+        "sizeOptions": { "type": "array" },
+        "materialOptions": { "type": "array" },
+        "finishingOptions": { "type": "array" },
+        "badge": { "type": "string", "maxLength": 60 },
+        "available": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "isNew": { "type": "boolean" },
+        "hidden": { "type": "boolean" },
+        "sortOrder": { "type": "number" },
+        "minOrder": { "type": "number" },
+        "stock": { "type": "number" },
+        "unit": { "type": "string", "maxLength": 40 },
+        "orderNotesHint": { "type": "string", "maxLength": 300 },
+        "rating": { "type": "number" },
+        "soldCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "storeId",
+        "name",
+        "categoryId",
+        "categoryName",
+        "price",
+        "originalPrice",
+        "description",
+        "shortDescription",
+        "images",
+        "variants",
+        "badge",
+        "available",
+        "featured",
+        "minOrder",
+        "stock",
+        "unit",
+        "orderNotesHint",
+        "rating",
+        "soldCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "GalleryItem": {
+      "title": "GalleryItem",
+      "description": "Portfolio or print production showcase item with multiple photos.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "title": { "type": "string", "maxLength": 160 },
+        "category": { "type": "string", "maxLength": 100 },
+        "clientName": { "type": "string", "maxLength": 120 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "images": { "type": "array" },
+        "featured": { "type": "boolean" },
+        "dateLabel": { "type": "string", "maxLength": 60 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "storeId", "title", "category", "clientName", "description", "images", "featured", "dateLabel", "createdAt", "updatedAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer printing order created via checkout and synchronized with WhatsApp and finance module.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "adminScope": { "type": "string", "enum": ["istafa_admin"] },
+        "orderNumber": { "type": "string", "maxLength": 60 },
+        "customerName": { "type": "string", "maxLength": 150 },
+        "customerPhone": { "type": "string", "maxLength": 40 },
+        "customerAddress": { "type": "string", "maxLength": 600 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "items": { "type": "array" },
+        "totalQuantity": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Baru", "Diproses", "Selesai", "Dibatalkan"] },
+        "paymentStatus": { "type": "string", "enum": ["Belum Bayar", "DP", "Lunas"] },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "financeRecorded": { "type": "boolean" },
+        "financeTxId": { "type": "string", "maxLength": 128 },
+        "dateIso": { "type": "string", "maxLength": 40 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "storeId",
+        "adminScope",
+        "orderNumber",
+        "customerName",
+        "customerPhone",
+        "customerAddress",
+        "notes",
+        "items",
+        "totalQuantity",
+        "totalAmount",
+        "status",
+        "paymentStatus",
+        "paymentMethod",
+        "financeRecorded",
+        "financeTxId",
+        "dateIso",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Customer record captured from orders or entered by admin.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "adminScope": { "type": "string", "enum": ["istafa_admin"] },
+        "name": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "address": { "type": "string", "maxLength": 600 },
+        "totalOrders": { "type": "number" },
+        "totalSpent": { "type": "number" },
+        "lastOrderDate": { "type": "string", "maxLength": 40 },
+        "notes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "storeId",
+        "adminScope",
+        "name",
+        "phone",
+        "address",
+        "totalOrders",
+        "totalSpent",
+        "lastOrderDate",
+        "notes",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FinanceTransaction": {
+      "title": "FinanceTransaction",
+      "description": "Income (Pemasukan), Expense (Pengeluaran), or Cash adjustment transaction.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "adminScope": { "type": "string", "enum": ["istafa_admin"] },
+        "transactionNumber": { "type": "string", "maxLength": 60 },
+        "type": { "type": "string", "enum": ["income", "expense", "cash_in", "cash_out", "correction"] },
+        "dateIso": { "type": "string", "maxLength": 40 },
+        "sourceOrTarget": { "type": "string", "maxLength": 160 },
+        "category": { "type": "string", "maxLength": 100 },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["Cash", "Transfer", "QRIS", "E-wallet", "Lainnya"] },
+        "description": { "type": "string", "maxLength": 1000 },
+        "proofImageUrl": { "type": "string", "maxLength": 250000 },
+        "relatedOrderId": { "type": "string", "maxLength": 128 },
+        "createdBy": { "type": "string", "maxLength": 100 },
+        "updatedBy": { "type": "string", "maxLength": 100 },
+        "correctionHistory": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "storeId",
+        "adminScope",
+        "transactionNumber",
+        "type",
+        "dateIso",
+        "sourceOrTarget",
+        "category",
+        "amount",
+        "paymentMethod",
+        "description",
+        "proofImageUrl",
+        "relatedOrderId",
+        "createdBy",
+        "updatedBy",
+        "correctionHistory",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "DebtReceivable": {
+      "title": "DebtReceivable",
+      "description": "Payable (Hutang) or Receivable (Piutang) record with payment tracking.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "adminScope": { "type": "string", "enum": ["istafa_admin"] },
+        "recordType": { "type": "string", "enum": ["hutang", "piutang"] },
+        "partyName": { "type": "string", "maxLength": 160 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "dateIso": { "type": "string", "maxLength": 40 },
+        "dueDateIso": { "type": "string", "maxLength": 40 },
+        "totalAmount": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Belum Lunas", "Sebagian", "Lunas"] },
+        "description": { "type": "string", "maxLength": 1000 },
+        "paymentHistory": { "type": "array" },
+        "createdBy": { "type": "string", "maxLength": 100 },
+        "updatedBy": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "id",
+        "storeId",
+        "adminScope",
+        "recordType",
+        "partyName",
+        "phone",
+        "dateIso",
+        "dueDateIso",
+        "totalAmount",
+        "paidAmount",
+        "status",
+        "description",
+        "paymentHistory",
+        "createdBy",
+        "updatedBy",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable audit log entry for administrative actions and financial mutations.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "storeId": { "type": "string", "enum": ["istafa_printing"] },
+        "adminScope": { "type": "string", "enum": ["istafa_admin"] },
+        "action": { "type": "string", "maxLength": 120 },
+        "module": { "type": "string", "maxLength": 60 },
+        "details": { "type": "string", "maxLength": 1000 },
+        "actor": { "type": "string", "maxLength": 100 },
+        "dateIso": { "type": "string", "maxLength": 40 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "storeId", "adminScope", "action", "module", "details", "actor", "dateIso", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Authorized Firebase Auth administrators."
+    },
+    "/admin_runtime/{docId}": {
+      "schema": { "$ref": "#/entities/AdminSessionState" },
+      "description": "Active admin session state document."
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/StoreSettings" },
+      "description": "Global store settings document (store_config)."
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Printing product categories."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Catalog products with multi-photo galleries."
+    },
+    "/gallery/{galleryId}": {
+      "schema": { "$ref": "#/entities/GalleryItem" },
+      "description": "Portfolio and print result gallery items."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Customer orders from storefront checkout."
+    },
+    "/customers/{customerId}": {
+      "schema": { "$ref": "#/entities/Customer" },
+      "description": "Customer directory and order statistics."
+    },
+    "/finance_transactions/{txId}": {
+      "schema": { "$ref": "#/entities/FinanceTransaction" },
+      "description": "Income, expense, and cash ledger transactions."
+    },
+    "/debts_receivables/{recordId}": {
+      "schema": { "$ref": "#/entities/DebtReceivable" },
+      "description": "Payables (Hutang) and Receivables (Piutang) records."
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Audit trail of admin and financial changes."
+    }
+  }
+}
